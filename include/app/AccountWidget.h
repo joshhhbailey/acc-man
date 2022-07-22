@@ -21,10 +21,13 @@ private:
     void createLayouts();
     void createConnections();
 
-    QLabel* m_usernameLabel;
-    QLabel* m_passwordLabel;
+    QLabel* m_aliasLabel;
+    QLineEdit* m_aliasLE;
 
+    QLabel* m_usernameLabel;
     QLineEdit* m_usernameLE;
+
+    QLabel* m_passwordLabel;
     QLineEdit* m_passwordLE;
 
     QPushButton* m_loginButton;
