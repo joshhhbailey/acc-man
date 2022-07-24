@@ -4,13 +4,13 @@
 
 #include "AccountWidget.h"
 
-AccountWidget::AccountWidget()
+AccountWidget::AccountWidget(int& _currentAccounts) : m_currentAccounts(_currentAccounts)
 {
     createWidgets();
     createLayouts();
     createConnections();
 
-    setMaximumSize(1024, 200);
+    setFixedHeight(100);
 }
 
 void AccountWidget::createWidgets()
@@ -67,5 +67,6 @@ void AccountWidget::loginButtonClicked()
 
 void AccountWidget::deleteButtonClicked()
 {
+    m_currentAccounts--;
     delete this;
 }

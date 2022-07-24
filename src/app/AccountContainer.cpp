@@ -16,14 +16,26 @@ AccountContainer::AccountContainer()
 
 void AccountContainer::createWidgets()
 {
+    m_scrollArea = new QScrollArea();
+    m_mainWidget = new QWidget();
+
     m_createAccountButton = new QPushButton("Create Account");
 }
 
 void AccountContainer::createLayouts()
 {
     m_mainLayout = new QVBoxLayout();
-    m_mainLayout->addWidget(m_createAccountButton);
-    m_mainLayout->setAlignment(Qt::AlignTop);
+    m_accountsLayout = new QVBoxLayout();
+
+    m_mainLayout->addWidget(m_scrollArea);
+    m_scrollArea->setWidget(m_mainWidget);
+    m_mainWidget->setLayout(m_accountsLayout);
+    m_accountsLayout->addWidget(m_createAccountButton);
+
+    m_scrollArea->setWidgetResizable(true);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    m_accountsLayout->setAlignment(Qt::AlignTop);
     setLayout(m_mainLayout);
 }
 
@@ -34,12 +46,16 @@ void AccountContainer::createConnections()
 
 void AccountContainer::createAccount()
 {
-    AccountWidget* accountWidget = new AccountWidget();
+    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts);
     m_accountWidgets.push_back(accountWidget);
-    m_mainLayout->addWidget(accountWidget);
+    m_accountsLayout->addWidget(accountWidget);
+    m_currentAccounts++;
 }
 
 void AccountContainer::createAccountButtonClicked()
 {
-    createAccount();
+    if (m_currentAccounts < m_maxAccounts)
+    {
+        createAccount();
+    }
 }

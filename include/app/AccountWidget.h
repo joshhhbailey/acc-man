@@ -10,7 +10,7 @@ class AccountWidget : public QGroupBox
 {
     Q_OBJECT
 public:
-    AccountWidget();
+    AccountWidget(int& _currentAccounts);
 
 public slots:
     void loginButtonClicked();
@@ -32,6 +32,8 @@ private:
 
     QPushButton* m_loginButton;
     QPushButton* m_deleteButton;
+
+    int& m_currentAccounts;
 };
 
 #endif  // _ACCOUNTWIDGET_H_

@@ -5,12 +5,12 @@
 - [Acc Man](#acc-man)
 	- [Contents](#contents)
 	- [Overview](#overview)
-		- [Dependencies](#dependencies)
+	- [Dependencies](#dependencies)
 
 ## Overview
 Account manager software for easy account switching.
 
-### Dependencies
+## Dependencies
 - Qt 6 - https://www.qt.io/
 - CMake - https://cmake.org/<br />
 - C++17
