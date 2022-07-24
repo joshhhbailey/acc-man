@@ -5,6 +5,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtCore/QUuid>
 
 class AccountWidget : public QGroupBox
 {
@@ -14,6 +15,7 @@ public:
 
 public slots:
     void loginButtonClicked();
+    void saveButtonClicked();
     void deleteButtonClicked();
 
 private:
@@ -30,9 +32,13 @@ private:
     QLabel* m_passwordLabel;
     QLineEdit* m_passwordLE;
 
+    QWidget* m_buttonsWidget;
     QPushButton* m_loginButton;
+    QPushButton* m_saveButton;
     QPushButton* m_deleteButton;
 
+
+    QUuid m_accountID = QUuid::createUuid();
     int& m_currentAccounts;
 };
 

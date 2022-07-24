@@ -18,8 +18,7 @@ void AccountContainer::createWidgets()
 {
     m_scrollArea = new QScrollArea();
     m_mainWidget = new QWidget();
-
-    m_createAccountButton = new QPushButton("Create Account");
+    m_createAccountButton = new QPushButton(tr("Create Account"));
 }
 
 void AccountContainer::createLayouts()

@@ -21,7 +21,7 @@ MainWindow::MainWindow()
 
 void MainWindow::createActions()
 {
-    m_aboutAction = new QAction("About");
+    m_aboutAction = new QAction(tr("About"));
 }
 
 void MainWindow::createMenus()
