@@ -6,11 +6,24 @@
 
 AccountWidget::AccountWidget(int& _currentAccounts) : m_currentAccounts(_currentAccounts)
 {
+    m_accountID = QUuid::createUuid();
     createWidgets();
     createLayouts();
     createConnections();
-
     setFixedHeight(120);
+}
+
+AccountWidget::AccountWidget(int& _currentAccounts, QString _id, QString _alias, QString _username, QString _password) : m_currentAccounts(_currentAccounts)
+{
+    createWidgets();
+    createLayouts();
+    createConnections();
+    setFixedHeight(120);
+
+    m_accountID = QUuid::fromString(_id);
+    m_aliasLE->setText(_alias);
+    m_usernameLE->setText(_username);
+    m_passwordLE->setText(_password);
 }
 
 void AccountWidget::createWidgets()
@@ -64,7 +77,7 @@ void AccountWidget::createConnections()
 void AccountWidget::loginButtonClicked()
 {
     // Write launch script
-    QFile file("../../accounts/" + m_accountID.toString(QUuid::Id128) + ".bat");
+    QFile file("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         return;
@@ -78,7 +91,7 @@ void AccountWidget::loginButtonClicked()
 void AccountWidget::saveButtonClicked()
 {
     // Write saved details
-    QFile file("../../accounts/" + m_accountID.toString(QUuid::Id128) + ".txt");
+    QFile file("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         return;
@@ -91,9 +104,9 @@ void AccountWidget::saveButtonClicked()
 void AccountWidget::deleteButtonClicked()
 {
     // Delete saved details
-    if (QFile::exists("../../accounts/" + m_accountID.toString(QUuid::Id128) + ".txt"))
+    if (QFile::exists("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt"))
     {
-        QFile::remove("../../accounts/" + m_accountID.toString(QUuid::Id128) + ".txt");
+        QFile::remove("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
     }
 
     m_currentAccounts--;

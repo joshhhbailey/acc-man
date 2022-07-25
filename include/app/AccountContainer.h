@@ -25,6 +25,8 @@ private:
     void createConnections();
 
     void createAccount();
+    void createAccount(QStringList _accountDetails);
+    bool loadSavedAccounts();
 
     QVBoxLayout* m_mainLayout;
     QScrollArea* m_scrollArea;

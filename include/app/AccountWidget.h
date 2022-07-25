@@ -12,6 +12,7 @@ class AccountWidget : public QGroupBox
     Q_OBJECT
 public:
     AccountWidget(int& _currentAccounts);
+    AccountWidget(int& _currentAccounts, QString _id, QString _alias, QString _username, QString _password);
 
 public slots:
     void loginButtonClicked();
@@ -37,8 +38,7 @@ private:
     QPushButton* m_saveButton;
     QPushButton* m_deleteButton;
 
-
-    QUuid m_accountID = QUuid::createUuid();
+    QUuid m_accountID;
     int& m_currentAccounts;
 };
 
