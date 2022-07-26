@@ -58,10 +58,7 @@ void AccountContainer::createAccount()
 
 void AccountContainer::createAccount(QStringList _accountDetails)
 {
-    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, _accountDetails[0], 
-                                                                        _accountDetails[1], 
-                                                                        _accountDetails[2],
-                                                                        _accountDetails[3]);
+    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, _accountDetails);
     m_accountWidgets.push_back(accountWidget);
     m_accountsLayout->addWidget(accountWidget);
     m_currentAccounts++;

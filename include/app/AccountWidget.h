@@ -5,19 +5,26 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtCore/QUuid>
+#include <QtCore/QMap>
 
 class AccountWidget : public QGroupBox
 {
     Q_OBJECT
 public:
     AccountWidget(int& _currentAccounts);
-    AccountWidget(int& _currentAccounts, QString _id, QString _alias, QString _username, QString _password);
+    AccountWidget(int& _currentAccounts, QStringList _accountDetails);
+
+    void populateComboBox();
 
 public slots:
     void loginButtonClicked();
     void saveButtonClicked();
     void deleteButtonClicked();
+    void detailsEdited();
+    void launchCheckBoxChanged();
 
 private:
     void createWidgets();
@@ -38,8 +45,29 @@ private:
     QPushButton* m_saveButton;
     QPushButton* m_deleteButton;
 
+    QCheckBox* m_launchCheckBox;
+    QComboBox* m_gamesComboBox;
+
     QUuid m_accountID;
     int& m_currentAccounts;
+
+    QMap<QString, int> m_gameIDs = {{"Apex Legends", 1172470},
+                                    {"Counter-Strike: Global Offensive", 730},
+                                    {"Dota 2", 570},
+                                    {"Grand Theft Auto V", 271590},
+                                    {"PUBG: BATTLEGROUNDS", 578080},
+                                    {"Rust", 252490},
+                                    {"Team Fortress 2", 440}
+                                   };
+
+    QMap<QString, QString> m_gameLogos = {{"Apex Legends", "1172470_icon.jpg"},
+                                        {"Counter-Strike: Global Offensive", "730_icon.jpg"},
+                                        {"Dota 2", "570_icon.jpg"},
+                                        {"Grand Theft Auto V", "271590_icon.jpg"},
+                                        {"PUBG: BATTLEGROUNDS", "578080_icon.jpg"},
+                                        {"Rust", "252490_icon.jpg"},
+                                        {"Team Fortress 2", "440_icon.jpg"}
+                                       };
 };
 
 #endif  // _ACCOUNTWIDGET_H_
