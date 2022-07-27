@@ -61,6 +61,9 @@ void AccountWidget::createWidgets()
     m_gamesComboBox->setInsertPolicy(QComboBox::InsertAfterCurrent);
     m_gamesComboBox->setEnabled(false);
     populateComboBox();
+
+    m_batchProcess = new QProcess();
+    m_batchProcess->setWorkingDirectory("../../accounts");
 }
 
 void AccountWidget::createLayouts()
@@ -98,6 +101,8 @@ void AccountWidget::createConnections()
 
     connect(m_launchCheckBox, SIGNAL(stateChanged(int)), this, SLOT(launchCheckBoxChanged()));
     connect(m_gamesComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(detailsEdited()));
+
+    connect(m_batchProcess, SIGNAL(finished(int)), this, SLOT(deleteScript()));
 }
 
 void AccountWidget::populateComboBox()
@@ -116,15 +121,17 @@ void AccountWidget::populateComboBox()
 void AccountWidget::loginButtonClicked()
 {
     // Write launch script
-    QFile file("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat");
+    QString filePath = "../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat";
+    QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         return;
     }
 
     QTextStream out(&file);
-    out << "Stop-Process -Name \"Steam\"\n"
-    "start \"\" \"C:\\Program Files (x86)\\Steam\\Steam.exe\" -login " << m_usernameLE->text() << " " << m_passwordLE->text();
+    out << 
+    "wmic process where name='steam.exe' delete\n"
+    "start \"\" \"C:/Program Files (x86)/Steam/Steam.exe\" -login " << m_usernameLE->text() << " " << m_passwordLE->text();
 
     if (m_launchCheckBox->isChecked())
     {
@@ -132,8 +139,8 @@ void AccountWidget::loginButtonClicked()
         out << " -applaunch " << launchID;
     }
 
-    // Run .bat
-    // Delete .bat
+    // Run script
+    m_batchProcess->start("cmd.exe", {QString("/C"), QString(m_accountID.toString(QUuid::WithoutBraces) + ".bat")});
 }
 
 void AccountWidget::saveButtonClicked()
@@ -192,4 +199,12 @@ void AccountWidget::launchCheckBoxChanged()
         m_gamesComboBox->setEnabled(false);
     }
     detailsEdited();
+}
+
+void AccountWidget::deleteScript()
+{
+    if (QFile::exists("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat"))
+    {
+        QFile::remove("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat");
+    }
 }

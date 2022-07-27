@@ -9,6 +9,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtCore/QUuid>
 #include <QtCore/QMap>
+#include <QtCore/QProcess>
 
 class AccountWidget : public QGroupBox
 {
@@ -25,6 +26,7 @@ public slots:
     void deleteButtonClicked();
     void detailsEdited();
     void launchCheckBoxChanged();
+    void deleteScript();
 
 private:
     void createWidgets();
@@ -50,6 +52,8 @@ private:
 
     QUuid m_accountID;
     int& m_currentAccounts;
+
+    QProcess* m_batchProcess;
 
     QMap<QString, int> m_gameIDs = {{"Apex Legends", 1172470},
                                     {"Counter-Strike: Global Offensive", 730},
