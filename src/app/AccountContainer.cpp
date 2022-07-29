@@ -5,6 +5,8 @@
 
 AccountContainer::AccountContainer()
 {
+    m_encrypter = new Encrypter();
+
     setMinimumSize(384, 360);
     setMaximumSize(768, 720);
 
@@ -50,7 +52,7 @@ void AccountContainer::createConnections()
 
 void AccountContainer::createAccount()
 {
-    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts);
+    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, m_encrypter);
     m_accountWidgets.push_back(accountWidget);
     m_accountsLayout->addWidget(accountWidget);
     m_currentAccounts++;
@@ -58,7 +60,7 @@ void AccountContainer::createAccount()
 
 void AccountContainer::createAccount(QStringList _accountDetails)
 {
-    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, _accountDetails);
+    AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, _accountDetails, m_encrypter);
     m_accountWidgets.push_back(accountWidget);
     m_accountsLayout->addWidget(accountWidget);
     m_currentAccounts++;

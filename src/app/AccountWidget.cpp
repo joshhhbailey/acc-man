@@ -4,7 +4,7 @@
 
 #include "AccountWidget.h"
 
-AccountWidget::AccountWidget(int& _currentAccounts) : m_currentAccounts(_currentAccounts)
+AccountWidget::AccountWidget(int& _currentAccounts, Encrypter* _encrypter) : m_currentAccounts(_currentAccounts), m_encrypter(_encrypter)
 {
     m_accountID = QUuid::createUuid();
     createWidgets();
@@ -13,7 +13,7 @@ AccountWidget::AccountWidget(int& _currentAccounts) : m_currentAccounts(_current
     setFixedHeight(120);
 }
 
-AccountWidget::AccountWidget(int& _currentAccounts, QStringList _accountDetails) : m_currentAccounts(_currentAccounts)
+AccountWidget::AccountWidget(int& _currentAccounts, QStringList _accountDetails, Encrypter* _encrypter) : m_currentAccounts(_currentAccounts), m_encrypter(_encrypter)
 {
     createWidgets();
     createLayouts();
@@ -23,7 +23,7 @@ AccountWidget::AccountWidget(int& _currentAccounts, QStringList _accountDetails)
     m_accountID = QUuid::fromString(_accountDetails[0]);
     m_aliasLE->setText(_accountDetails[1]);
     m_usernameLE->setText(_accountDetails[2]);
-    m_passwordLE->setText(_accountDetails[3]);
+    m_passwordLE->setText(m_encrypter->decrypt(_accountDetails[2], _accountDetails[3]));
     m_launchCheckBox->setChecked(_accountDetails[4].toInt());
 
     if (m_launchCheckBox->isChecked())
@@ -149,15 +149,18 @@ void AccountWidget::saveButtonClicked()
     m_saveButton->setText(tr("Saved!"));
     m_saveButton->setEnabled(false);
 
-    // Write saved details
+    // Create file
     QFile file("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         return;
     }
 
+    // Write saved details
     QTextStream out(&file);
-    out << m_aliasLE->text() << "\n" << m_usernameLE->text() << "\n" << m_passwordLE->text() << "\n" << m_launchCheckBox->isChecked();
+    out << m_aliasLE->text() << "\n" << m_usernameLE->text() << "\n"
+        << m_encrypter->encrypt(m_usernameLE->text(), m_passwordLE->text())
+        << "\n" << m_launchCheckBox->isChecked();
 
     if (m_launchCheckBox->isChecked())
     {
@@ -203,6 +206,7 @@ void AccountWidget::launchCheckBoxChanged()
 
 void AccountWidget::deleteScript()
 {
+    // Delete launch script
     if (QFile::exists("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat"))
     {
         QFile::remove("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat");

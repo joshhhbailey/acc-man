@@ -8,6 +8,7 @@
 #include <QtCore/QVector>
 
 #include "AccountWidget.h"
+#include "Encrypter.h"
 
 
 class AccountContainer : public QGroupBox
@@ -38,6 +39,8 @@ private:
 
     int m_maxAccounts = 10;
     int m_currentAccounts = 0;
+
+    Encrypter* m_encrypter;
 };
 
 #endif  // _ACCOUNTCONTAINER_H_

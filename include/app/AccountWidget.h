@@ -11,12 +11,14 @@
 #include <QtCore/QMap>
 #include <QtCore/QProcess>
 
+#include "Encrypter.h"
+
 class AccountWidget : public QGroupBox
 {
     Q_OBJECT
 public:
-    AccountWidget(int& _currentAccounts);
-    AccountWidget(int& _currentAccounts, QStringList _accountDetails);
+    AccountWidget(int& _currentAccounts, Encrypter* _encrypter);
+    AccountWidget(int& _currentAccounts, QStringList _accountDetails, Encrypter* _encrypter);
 
     void populateComboBox();
 
@@ -32,6 +34,8 @@ private:
     void createWidgets();
     void createLayouts();
     void createConnections();
+
+    Encrypter* m_encrypter;
 
     QLabel* m_aliasLabel;
     QLineEdit* m_aliasLE;
