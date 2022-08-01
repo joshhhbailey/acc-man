@@ -14,16 +14,12 @@ private:
     void createWidgets();
     void createLayouts();
 
-    QLabel *m_welcomeLabel;
-    QLabel *m_descriptionLabel;
-    QLabel *m_CETitleLabel;
-    QLabel *m_CEDescriptionLabel;
-    QLabel *m_NETitleLabel;
-    QLabel *m_NEDescriptionLabel;
-    QLabel *m_inspiredLabel;
-    QLabel *m_linkOne;
-    QLabel *m_contactLabel;
-    QLabel *m_linkTwo;
+    QLabel* m_welcomeLabel;
+    QLabel* m_descriptionLabel;
+    QLabel* m_DNTitleLabel;
+    QLabel* m_DNDescriptionLabel;
+    QLabel* m_contactLabel;
+    QLabel* m_linkOne;
 };
 
 #endif   // _ABOUTWIDGET_H_

@@ -29,3 +29,21 @@ set_target_properties(${TARGETNAME} PROPERTIES
     WIN32_EXECUTABLE ON		# Prevent the creation of a console window on Windows [THIS MIGHT BE PROBLEMATIC]
     MACOSX_BUNDLE ON		# Create an application bundle on macOS
 )
+
+qt_add_resources(${TARGETNAME} "${TARGETNAME}_images"
+    PREFIX "/"
+    FILES
+        ../../images/game_icons/440_icon.jpg
+        ../../images/game_icons/570_icon.jpg
+        ../../images/game_icons/730_icon.jpg
+        ../../images/game_icons/252490_icon.jpg
+        ../../images/game_icons/271590_icon.jpg
+        ../../images/game_icons/578080_icon.jpg
+        ../../images/game_icons/1172470_icon.jpg
+		../../images/platform_icons/steam_icon.png
+		../../images/platform_icons/lol_icon.png
+)
+
+install(TARGETS ${TARGETNAME} DESTINATION bin)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/images" DESTINATION .)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/accounts" DESTINATION .)

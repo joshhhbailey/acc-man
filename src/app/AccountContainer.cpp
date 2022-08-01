@@ -1,5 +1,6 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtCore/QDirIterator>
+#include <QtCore/QDir>
 
 #include "AccountContainer.h"
 
@@ -13,6 +14,11 @@ AccountContainer::AccountContainer()
     createWidgets();
     createLayouts();
     createConnections();
+
+    if (!QDir("accounts").exists())
+    {
+        QDir().mkdir("../accounts");
+    }
 
     if (!loadSavedAccounts())
     {
@@ -69,16 +75,16 @@ void AccountContainer::createAccount(QStringList _accountDetails)
 bool AccountContainer::loadSavedAccounts()
 {
     // Check directory contains files
-    if (QDir("../../accounts").isEmpty())
+    if (!QDir("../accounts").exists() || QDir("../accounts").isEmpty())
     {
         return false;
     }
 
     // Iterate through all saved accounts
-    QStringList files = QDir("../../accounts").entryList(QDir::Files);
+    QStringList files = QDir("../accounts").entryList(QDir::Files);
     foreach (const QString &fileName, files)
     {
-        QFile file("../../accounts/" + fileName);
+        QFile file("../accounts/" + fileName);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             return false;

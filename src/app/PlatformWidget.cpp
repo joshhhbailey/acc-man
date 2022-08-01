@@ -1,45 +1,47 @@
-#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QVBoxLayout>
 
 #include "PlatformWidget.h"
 
-PlatformWidget::PlatformWidget()
+PlatformWidget::PlatformWidget(QMap<QString, QString>& _platformLogos, QMap<QString, bool>& _activePlatforms, QString _platformName)
+    : m_platformLogos(_platformLogos), m_activePlatforms(_activePlatforms), m_platformName(_platformName)
 {
+    setFixedHeight(120);
+
     createWidgets();
     createLayouts();
     createConnections();
 }
 
 void PlatformWidget::createWidgets()
-{
-    m_platformLabel = new QLabel();
-    m_platformLabel->setText("Platforms");
+{;
+    m_mainButton = new QPushButton();
+    m_mainButton->setFixedHeight(95);
 
-    m_newButton = new QPushButton("New");
-    m_deleteButton = new QPushButton("Delete");
+    QString iconPath = m_platformLogos[m_platformName];
+    m_mainButton->setIcon(QIcon(":images/platform_icons/" + iconPath));
+    m_mainButton->setIconSize(QSize(60, 60));
+    m_activePlatforms[m_platformName] = true;
+
+    if (m_platformName == "League of Legends")
+    {
+        m_mainButton->setPalette(QPalette(Qt::darkGray));
+        m_mainButton->setEnabled(false);
+    }
 }
 
 void PlatformWidget::createLayouts()
 {
-    QGridLayout *mainLayout = new QGridLayout();
-    mainLayout->addWidget(m_platformLabel, 0, 0, 1, 1);
-    mainLayout->addWidget(m_newButton, 3, 0, 1, 1);
-    mainLayout->addWidget(m_deleteButton, 3, 1, 1, 1);
+    QVBoxLayout *mainLayout = new QVBoxLayout();
+    mainLayout->addWidget(m_mainButton);
     setLayout(mainLayout);
 }
 
 void PlatformWidget::createConnections()
 {
-    //connect(m_compileButton, SIGNAL(clicked()), this, SLOT(compileButtonClicked()));
-    //connect(m_pauseButton, SIGNAL(clicked()), this, SLOT(pauseButtonClicked()));
-    //connect(m_libraryButton, SIGNAL(clicked()), this, SLOT(libraryButtonClicked()));
+    //
 }
 
-void PlatformWidget::newButtonClicked()
+void PlatformWidget::mainButtonClicked()
 {
-
-}
-
-void PlatformWidget::deleteButtonClicked()
-{
-
+    //
 }

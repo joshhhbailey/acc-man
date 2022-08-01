@@ -6,11 +6,9 @@
 
 MainWindow::MainWindow()
 {
-    setWindowTitle(tr("Account Manager"));
-    setMinimumSize(512, 360);
+    setWindowTitle(tr("AccountManager v1.0.0"));
+    setMinimumSize(1024, 720);
     setMaximumSize(1024, 720);
-
-    resize(1024, 720);
 
     createActions();
     createMenus();
@@ -39,7 +37,6 @@ void MainWindow::createWidgets()
     setCentralWidget(m_mainWidget);
 
     m_aboutWidget = new AboutWidget();
-    m_aboutWidget->setFixedSize(400, 600);
 
     m_platformContainer = new PlatformContainer();
     m_accountContainer = new AccountContainer();

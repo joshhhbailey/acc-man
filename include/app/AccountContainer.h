@@ -10,7 +10,6 @@
 #include "AccountWidget.h"
 #include "Encrypter.h"
 
-
 class AccountContainer : public QGroupBox
 {
     Q_OBJECT

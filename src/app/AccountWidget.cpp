@@ -4,16 +4,21 @@
 
 #include "AccountWidget.h"
 
-AccountWidget::AccountWidget(int& _currentAccounts, Encrypter* _encrypter) : m_currentAccounts(_currentAccounts), m_encrypter(_encrypter)
+AccountWidget::AccountWidget(int& _currentAccounts, Encrypter* _encrypter)
+    : m_currentAccounts(_currentAccounts), m_encrypter(_encrypter)
 {
     m_accountID = QUuid::createUuid();
     createWidgets();
     createLayouts();
     createConnections();
     setFixedHeight(120);
+
+    m_saveButton->setPalette(QPalette(Qt::darkGray));
+    m_saveButton->setEnabled(false);
 }
 
-AccountWidget::AccountWidget(int& _currentAccounts, QStringList _accountDetails, Encrypter* _encrypter) : m_currentAccounts(_currentAccounts), m_encrypter(_encrypter)
+AccountWidget::AccountWidget(int& _currentAccounts, QStringList _accountDetails, Encrypter* _encrypter)
+    : m_currentAccounts(_currentAccounts), m_encrypter(_encrypter)
 {
     createWidgets();
     createLayouts();
@@ -63,7 +68,7 @@ void AccountWidget::createWidgets()
     populateComboBox();
 
     m_batchProcess = new QProcess();
-    m_batchProcess->setWorkingDirectory("../../accounts");
+    m_batchProcess->setWorkingDirectory("../accounts");
 }
 
 void AccountWidget::createLayouts()
@@ -113,7 +118,7 @@ void AccountWidget::populateComboBox()
     {
         iter.previous();
         QString logo = m_gameLogos.value(iter.key());
-        m_gamesComboBox->insertItem(0, QIcon("../../images/" + logo), iter.key());
+        m_gamesComboBox->insertItem(0, QIcon(":images/game_icons/" + logo), iter.key());
     }
     m_gamesComboBox->setCurrentIndex(0);
 }
@@ -121,7 +126,7 @@ void AccountWidget::populateComboBox()
 void AccountWidget::loginButtonClicked()
 {
     // Write launch script
-    QString filePath = "../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat";
+    QString filePath = "../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat";
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -150,7 +155,7 @@ void AccountWidget::saveButtonClicked()
     m_saveButton->setEnabled(false);
 
     // Create file
-    QFile file("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
+    QFile file("../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         return;
@@ -171,9 +176,9 @@ void AccountWidget::saveButtonClicked()
 void AccountWidget::deleteButtonClicked()
 {
     // Delete saved details
-    if (QFile::exists("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt"))
+    if (QFile::exists("../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt"))
     {
-        QFile::remove("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
+        QFile::remove("../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".txt");
     }
 
     m_currentAccounts--;
@@ -182,10 +187,19 @@ void AccountWidget::deleteButtonClicked()
 
 void AccountWidget::detailsEdited()
 {
-    // Fade save button
-    m_saveButton->setPalette(QPalette(QColor(45, 45, 45)));
+    // Un-fade save button
     m_saveButton->setText(tr("Save"));
-    m_saveButton->setEnabled(true);
+
+    if (m_aliasLE->text().length() > 0 && m_usernameLE->text().length() > 0 && m_passwordLE->text().length() > 0)
+    {
+        m_saveButton->setPalette(QPalette(QColor(45, 45, 45)));
+        m_saveButton->setEnabled(true);
+    }
+    else
+    {
+        m_saveButton->setPalette(QPalette(Qt::darkGray));
+        m_saveButton->setEnabled(false);
+    }
 }
 
 void AccountWidget::launchCheckBoxChanged()
@@ -207,8 +221,8 @@ void AccountWidget::launchCheckBoxChanged()
 void AccountWidget::deleteScript()
 {
     // Delete launch script
-    if (QFile::exists("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat"))
+    if (QFile::exists("../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat"))
     {
-        QFile::remove("../../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat");
+        QFile::remove("../accounts/" + m_accountID.toString(QUuid::WithoutBraces) + ".bat");
     }
 }

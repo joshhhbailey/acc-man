@@ -69,13 +69,13 @@ private:
                                    };
 
     QMap<QString, QString> m_gameLogos = {{"Apex Legends", "1172470_icon.jpg"},
-                                        {"Counter-Strike: Global Offensive", "730_icon.jpg"},
-                                        {"Dota 2", "570_icon.jpg"},
-                                        {"Grand Theft Auto V", "271590_icon.jpg"},
-                                        {"PUBG: BATTLEGROUNDS", "578080_icon.jpg"},
-                                        {"Rust", "252490_icon.jpg"},
-                                        {"Team Fortress 2", "440_icon.jpg"}
-                                       };
+                                          {"Counter-Strike: Global Offensive", "730_icon.jpg"},
+                                          {"Dota 2", "570_icon.jpg"},
+                                          {"Grand Theft Auto V", "271590_icon.jpg"},
+                                          {"PUBG: BATTLEGROUNDS", "578080_icon.jpg"},
+                                          {"Rust", "252490_icon.jpg"},
+                                          {"Team Fortress 2", "440_icon.jpg"}
+                                         };
 };
 
 #endif  // _ACCOUNTWIDGET_H_

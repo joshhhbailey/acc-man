@@ -3,28 +3,27 @@
 
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QTextEdit>
+#include <QtCore/QMap>
 
 class PlatformWidget : public QGroupBox
 {
     Q_OBJECT
 public:
-    PlatformWidget();
+    PlatformWidget(QMap<QString, QString>& _platformLogos, QMap<QString, bool>& _activePlatforms, QString _platformName);
 
 public slots:
-    void newButtonClicked();
-    void deleteButtonClicked();
+    void mainButtonClicked();
 
 private:
     void createWidgets();
     void createLayouts();
     void createConnections();
 
-    QLabel* m_platformLabel;
+    QPushButton* m_mainButton;
 
-    QPushButton* m_newButton;
-    QPushButton* m_deleteButton;
+    QMap<QString, QString> &m_platformLogos;
+    QMap<QString, bool> &m_activePlatforms;
+    QString m_platformName;
 };
 
 #endif  // _PLATFORMWIDGET_H_
