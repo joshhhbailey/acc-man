@@ -68,13 +68,13 @@ private:
                                     {"Team Fortress 2", 440}
                                    };
 
-    QMap<QString, QString> m_gameLogos = {{"Apex Legends", "1172470_icon.jpg"},
-                                          {"Counter-Strike: Global Offensive", "730_icon.jpg"},
-                                          {"Dota 2", "570_icon.jpg"},
-                                          {"Grand Theft Auto V", "271590_icon.jpg"},
-                                          {"PUBG: BATTLEGROUNDS", "578080_icon.jpg"},
-                                          {"Rust", "252490_icon.jpg"},
-                                          {"Team Fortress 2", "440_icon.jpg"}
+    QMap<QString, QString> m_gameLogos = {{"Apex Legends", "1172470_icon.png"},
+                                          {"Counter-Strike: Global Offensive", "730_icon.png"},
+                                          {"Dota 2", "570_icon.png"},
+                                          {"Grand Theft Auto V", "271590_icon.png"},
+                                          {"PUBG: BATTLEGROUNDS", "578080_icon.png"},
+                                          {"Rust", "252490_icon.png"},
+                                          {"Team Fortress 2", "440_icon.png"}
                                          };
 };
 

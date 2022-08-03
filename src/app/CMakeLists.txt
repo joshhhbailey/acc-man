@@ -33,17 +33,22 @@ set_target_properties(${TARGETNAME} PROPERTIES
 qt_add_resources(${TARGETNAME} "${TARGETNAME}_images"
     PREFIX "/"
     FILES
-        ../../images/game_icons/440_icon.jpg
-        ../../images/game_icons/570_icon.jpg
-        ../../images/game_icons/730_icon.jpg
-        ../../images/game_icons/252490_icon.jpg
-        ../../images/game_icons/271590_icon.jpg
-        ../../images/game_icons/578080_icon.jpg
-        ../../images/game_icons/1172470_icon.jpg
+        ../../images/game_icons/440_icon.png
+        ../../images/game_icons/440_icon.png
+        ../../images/game_icons/570_icon.png
+        ../../images/game_icons/730_icon.png
+        ../../images/game_icons/252490_icon.png
+        ../../images/game_icons/271590_icon.png
+        ../../images/game_icons/578080_icon.png
+        ../../images/game_icons/1172470_icon.png
 		../../images/platform_icons/steam_icon.png
 		../../images/platform_icons/lol_icon.png
 )
 
 install(TARGETS ${TARGETNAME} DESTINATION bin)
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/images" DESTINATION .)
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/accounts" DESTINATION .)
+install(DIRECTORY ../../dependencies/platforms DESTINATION bin)
+install(FILES 
+			../../dependencies/Qt6Core.dll
+			../../dependencies/Qt6Gui.dll
+			../../dependencies/Qt6Widgets.dll
+		DESTINATION bin)

@@ -112,13 +112,12 @@ void AccountWidget::createConnections()
 
 void AccountWidget::populateComboBox()
 {
-    QMapIterator<QString, int> iter(m_gameIDs);
+    QMapIterator<QString, QString> iter(m_gameLogos);
     iter.toBack();
     while (iter.hasPrevious())
     {
         iter.previous();
-        QString logo = m_gameLogos.value(iter.key());
-        m_gamesComboBox->insertItem(0, QIcon(":images/game_icons/" + logo), iter.key());
+        m_gamesComboBox->insertItem(0, QIcon(":images/game_icons/" + iter.value()), iter.key());
     }
     m_gamesComboBox->setCurrentIndex(0);
 }
