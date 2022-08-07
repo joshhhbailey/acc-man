@@ -28,6 +28,7 @@ public slots:
     void deleteButtonClicked();
     void detailsEdited();
     void launchCheckBoxChanged();
+    void passwordCheckBoxChanged();
     void deleteScript();
 
 private:
@@ -53,6 +54,7 @@ private:
 
     QCheckBox* m_launchCheckBox;
     QComboBox* m_gamesComboBox;
+    QCheckBox* m_passwordCheckBox;
 
     QUuid m_accountID;
     int& m_currentAccounts;

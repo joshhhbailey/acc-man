@@ -67,6 +67,8 @@ void AccountWidget::createWidgets()
     m_gamesComboBox->setEnabled(false);
     populateComboBox();
 
+    m_passwordCheckBox = new QCheckBox(tr("Show Password"));
+
     m_batchProcess = new QProcess();
     m_batchProcess->setWorkingDirectory("../accounts");
 }
@@ -78,10 +80,11 @@ void AccountWidget::createLayouts()
     mainLayout->addWidget(m_aliasLE, 1, 0, 1, 1);
     mainLayout->addWidget(m_usernameLabel, 0, 1, 1, 1);
     mainLayout->addWidget(m_usernameLE, 1, 1, 1, 1);
-    mainLayout->addWidget(m_launchCheckBox, 2, 1, 1, 1);
     mainLayout->addWidget(m_passwordLabel, 0, 2, 1, 1);
     mainLayout->addWidget(m_passwordLE, 1, 2, 1, 1);
-    mainLayout->addWidget(m_gamesComboBox, 2, 2, 1, 1);
+    mainLayout->addWidget(m_launchCheckBox, 2, 0, 1, 1);
+    mainLayout->addWidget(m_gamesComboBox, 2, 1, 1, 1);
+    mainLayout->addWidget(m_passwordCheckBox, 2, 2, 1, 1);
 
     m_buttonsWidget = new QWidget();
     QVBoxLayout* buttonsLayout = new QVBoxLayout();
@@ -106,6 +109,7 @@ void AccountWidget::createConnections()
 
     connect(m_launchCheckBox, SIGNAL(stateChanged(int)), this, SLOT(launchCheckBoxChanged()));
     connect(m_gamesComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(detailsEdited()));
+    connect(m_passwordCheckBox, SIGNAL(stateChanged(int)), this, SLOT(passwordCheckBoxChanged()));
 
     connect(m_batchProcess, SIGNAL(finished(int)), this, SLOT(deleteScript()));
 }
@@ -135,7 +139,7 @@ void AccountWidget::loginButtonClicked()
     QTextStream out(&file);
     out << 
     "wmic process where name='steam.exe' delete\n"
-    "start \"\" \"C:/Program Files (x86)/Steam/Steam.exe\" -login " << m_usernameLE->text() << " " << m_passwordLE->text();
+    "start \"\" \"C:/Program Files (x86)/Steam/Steam.exe\" -login " << m_usernameLE->text() << " \"" << m_passwordLE->text().replace(QString("\""), QString("\"\"")) << "\"";
 
     if (m_launchCheckBox->isChecked())
     {
@@ -215,6 +219,18 @@ void AccountWidget::launchCheckBoxChanged()
         m_gamesComboBox->setEnabled(false);
     }
     detailsEdited();
+}
+
+void AccountWidget::passwordCheckBoxChanged()
+{
+    if (m_passwordCheckBox->isChecked())
+    {
+        m_passwordLE->setEchoMode(QLineEdit::Normal);
+    }
+    else
+    {
+        m_passwordLE->setEchoMode(QLineEdit::Password);
+    }
 }
 
 void AccountWidget::deleteScript()
