@@ -10,8 +10,7 @@ AccountContainer::AccountContainer()
 
     setFixedWidth(768);
 
-    m_createButton = new QPushButton(tr("Create Account"));
-    m_secondaryLayout->addWidget(m_createButton);
+    m_createButton->setText(tr("Create Account"));
 
     createConnections();
 

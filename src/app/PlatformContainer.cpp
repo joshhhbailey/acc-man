@@ -6,7 +6,7 @@ PlatformContainer::PlatformContainer()
 {
     setFixedWidth(256);
 
-    m_createButton = new QPushButton(tr("Create Platform"));
+    m_createButton->setText(tr("Create Platform"));
     m_createButton->setPalette(QPalette(Qt::darkGray));
     m_createButton->setEnabled(false);
     m_secondaryLayout->addWidget(m_createButton);

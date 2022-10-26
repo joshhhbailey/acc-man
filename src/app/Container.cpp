@@ -12,6 +12,7 @@ void Container::createWidgets()
 {
     m_scrollArea = new QScrollArea();
     m_mainWidget = new QWidget();
+    m_createButton = new QPushButton();
 }
 
 void Container::createLayouts()
@@ -22,6 +23,7 @@ void Container::createLayouts()
     m_mainLayout->addWidget(m_scrollArea);
     m_scrollArea->setWidget(m_mainWidget);
     m_mainWidget->setLayout(m_secondaryLayout);
+    m_secondaryLayout->addWidget(m_createButton);
 
     m_scrollArea->setWidgetResizable(true);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
