@@ -8,11 +8,11 @@ AccountContainer::AccountContainer()
 {
     m_encrypter = new Encrypter();
 
-    setMinimumSize(384, 360);
-    setMaximumSize(768, 720);
+    setFixedWidth(768);
 
-    createWidgets();
-    createLayouts();
+    m_createButton = new QPushButton(tr("Create Account"));
+    m_secondaryLayout->addWidget(m_createButton);
+
     createConnections();
 
     if (!QDir("accounts").exists())
@@ -27,40 +27,16 @@ AccountContainer::AccountContainer()
     }
 }
 
-void AccountContainer::createWidgets()
-{
-    m_scrollArea = new QScrollArea();
-    m_mainWidget = new QWidget();
-    m_createAccountButton = new QPushButton(tr("Create Account"));
-}
-
-void AccountContainer::createLayouts()
-{
-    m_mainLayout = new QVBoxLayout();
-    m_accountsLayout = new QVBoxLayout();
-
-    m_mainLayout->addWidget(m_scrollArea);
-    m_scrollArea->setWidget(m_mainWidget);
-    m_mainWidget->setLayout(m_accountsLayout);
-    m_accountsLayout->addWidget(m_createAccountButton);
-
-    m_scrollArea->setWidgetResizable(true);
-    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    m_accountsLayout->setAlignment(Qt::AlignTop);
-    setLayout(m_mainLayout);
-}
-
 void AccountContainer::createConnections()
 {
-    connect(m_createAccountButton, SIGNAL(clicked()), this, SLOT(createAccountButtonClicked()));
+    connect(m_createButton, SIGNAL(clicked()), this, SLOT(createButtonClicked()));
 }
 
 void AccountContainer::createAccount()
 {
     AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, m_encrypter);
     m_accountWidgets.push_back(accountWidget);
-    m_accountsLayout->addWidget(accountWidget);
+    m_secondaryLayout->addWidget(accountWidget);
     m_currentAccounts++;
 }
 
@@ -68,7 +44,7 @@ void AccountContainer::createAccount(QStringList _accountDetails)
 {
     AccountWidget* accountWidget = new AccountWidget(m_currentAccounts, _accountDetails, m_encrypter);
     m_accountWidgets.push_back(accountWidget);
-    m_accountsLayout->addWidget(accountWidget);
+    m_secondaryLayout->addWidget(accountWidget);
     m_currentAccounts++;
 }
 
@@ -103,7 +79,7 @@ bool AccountContainer::loadSavedAccounts()
     return true;
 }
 
-void AccountContainer::createAccountButtonClicked()
+void AccountContainer::createButtonClicked()
 {
     if (m_currentAccounts < m_maxAccounts)
     {

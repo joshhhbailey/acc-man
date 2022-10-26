@@ -1,38 +1,26 @@
 #ifndef PLATFORMCONTAINER_H_
 #define PLATFORMCONTAINER_H_
 
-#include <QtWidgets/QGroupBox>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
 #include <QtCore/QVector>
 #include <QtCore/QMap>
 
+#include "Container.h"
 #include "PlatformWidget.h"
 
-class PlatformContainer : public QGroupBox
+class PlatformContainer : public Container
 {
     Q_OBJECT
 public:
     PlatformContainer();
 
 public slots:
-    void createPlatformButtonClicked();
+    void createButtonClicked();
 
 private:
-    void createWidgets();
-    void createLayouts();
     void createConnections();
-
     void createPlatform(QString _platformName);
 
-    QVBoxLayout* m_mainLayout;
-    QScrollArea* m_scrollArea;
-    QWidget* m_mainWidget;
-    QVBoxLayout* m_platformsLayout;
-
     QVector<PlatformWidget*> m_platformWidgets;
-    QPushButton* m_createPlatformButton;
 
     QMap<QString, QString> m_platformLogos = {{"Steam", "steam_icon.png"},
                                               {"League of Legends", "lol_icon.png"},

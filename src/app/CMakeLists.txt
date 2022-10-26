@@ -10,7 +10,8 @@ target_sources(${TARGETNAME} PRIVATE
 	${PROJECT_SOURCE_DIR}/src/app/PlatformContainer.cpp
 	${PROJECT_SOURCE_DIR}/src/app/PlatformWidget.cpp
 	${PROJECT_SOURCE_DIR}/src/app/Encrypter.cpp
-
+	${PROJECT_SOURCE_DIR}/src/app/Container.cpp
+	
 	# .h
 	${PROJECT_SOURCE_DIR}/include/app/AboutWidget.h
 	${PROJECT_SOURCE_DIR}/include/app/MainWindow.h
@@ -19,6 +20,7 @@ target_sources(${TARGETNAME} PRIVATE
 	${PROJECT_SOURCE_DIR}/include/app/PlatformContainer.h
 	${PROJECT_SOURCE_DIR}/include/app/PlatformWidget.h
 	${PROJECT_SOURCE_DIR}/include/app/Encrypter.h
+	${PROJECT_SOURCE_DIR}/include/app/Container.h
 )
 
 target_include_directories(${TARGETNAME} PRIVATE ${CMAKE_SOURCE_DIR}/include/app)

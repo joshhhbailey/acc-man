@@ -9,7 +9,7 @@ class PlatformWidget : public QGroupBox
 {
     Q_OBJECT
 public:
-    PlatformWidget(QMap<QString, QString>& _platformLogos, QMap<QString, bool>& _activePlatforms, QString _platformName);
+    PlatformWidget(QMap<QString, QString>& _platformLogos, QString _platformName);
 
 public slots:
     void mainButtonClicked();
@@ -22,7 +22,6 @@ private:
     QPushButton* m_mainButton;
 
     QMap<QString, QString> &m_platformLogos;
-    QMap<QString, bool> &m_activePlatforms;
     QString m_platformName;
 };
 
