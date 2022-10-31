@@ -10,8 +10,8 @@ AccountContainer::AccountContainer()
 
     setFixedWidth(768);
 
-    m_createButton->setText(tr("Create Account"));
-
+    createWidgets();
+    createLayouts();
     createConnections();
 
     if (!QDir("accounts").exists())
@@ -24,6 +24,17 @@ AccountContainer::AccountContainer()
         // No saved accounts loaded
         createAccount();
     }
+}
+
+void AccountContainer::createWidgets()
+{
+    m_createButton = new QPushButton();
+    m_createButton->setText(tr("Create Account"));
+}
+
+void AccountContainer::createLayouts()
+{
+    m_secondaryLayout->addWidget(m_createButton);
 }
 
 void AccountContainer::createConnections()

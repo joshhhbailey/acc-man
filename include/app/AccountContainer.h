@@ -17,6 +17,8 @@ public slots:
     void createButtonClicked();
 
 private:
+    void createWidgets();
+    void createLayouts();
     void createConnections();
 
     void createAccount();
@@ -24,6 +26,7 @@ private:
     bool loadSavedAccounts();
 
     QVector<AccountWidget*> m_accountWidgets;
+    QPushButton* m_createButton;
 
     int m_maxAccounts = 10;
     int m_currentAccounts = 0;

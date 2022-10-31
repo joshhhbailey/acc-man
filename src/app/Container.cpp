@@ -12,32 +12,20 @@ void Container::createWidgets()
 {
     m_scrollArea = new QScrollArea();
     m_mainWidget = new QWidget();
-    m_createButton = new QPushButton();
 }
 
 void Container::createLayouts()
 {
-    m_mainLayout = new QVBoxLayout();
+    m_mainLayout = new QHBoxLayout();
     m_secondaryLayout = new QVBoxLayout();
 
     m_mainLayout->addWidget(m_scrollArea);
     m_scrollArea->setWidget(m_mainWidget);
     m_mainWidget->setLayout(m_secondaryLayout);
-    m_secondaryLayout->addWidget(m_createButton);
 
     m_scrollArea->setWidgetResizable(true);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     m_secondaryLayout->setAlignment(Qt::AlignTop);
     setLayout(m_mainLayout);
-}
-
-void Container::createConnections()
-{
-    // No implementation required
-}
-
-void Container::createButtonClicked()
-{
-    // No implementation required
 }

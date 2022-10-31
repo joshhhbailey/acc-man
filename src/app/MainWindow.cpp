@@ -39,7 +39,6 @@ void MainWindow::createWidgets()
     m_aboutWidget = new AboutWidget();
 
     m_platformContainer = new PlatformContainer();
-    m_accountContainer = new AccountContainer();
 }
 
 void MainWindow::createLayouts()
@@ -47,7 +46,6 @@ void MainWindow::createLayouts()
     QHBoxLayout* mainLayout = new QHBoxLayout();
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(m_platformContainer);
-    mainLayout->addWidget(m_accountContainer);
     m_mainWidget->setLayout(mainLayout);
 }
 

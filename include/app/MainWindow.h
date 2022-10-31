@@ -4,7 +4,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtGui/QPalette>
 
-#include "AccountContainer.h"
 #include "PlatformContainer.h"
 #include "AboutWidget.h"
 
@@ -35,7 +34,6 @@ private:
 
     // Containers
     PlatformContainer* m_platformContainer;
-    AccountContainer* m_accountContainer;
 };
 
 #endif  // _MAINWINDOW_H_

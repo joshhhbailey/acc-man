@@ -8,7 +8,6 @@ target_sources(${TARGETNAME} PRIVATE
 	${PROJECT_SOURCE_DIR}/src/app/AccountContainer.cpp
 	${PROJECT_SOURCE_DIR}/src/app/AccountWidget.cpp
 	${PROJECT_SOURCE_DIR}/src/app/PlatformContainer.cpp
-	${PROJECT_SOURCE_DIR}/src/app/PlatformWidget.cpp
 	${PROJECT_SOURCE_DIR}/src/app/Encrypter.cpp
 	${PROJECT_SOURCE_DIR}/src/app/Container.cpp
 	
@@ -18,7 +17,6 @@ target_sources(${TARGETNAME} PRIVATE
 	${PROJECT_SOURCE_DIR}/include/app/AccountContainer.h
 	${PROJECT_SOURCE_DIR}/include/app/AccountWidget.h
 	${PROJECT_SOURCE_DIR}/include/app/PlatformContainer.h
-	${PROJECT_SOURCE_DIR}/include/app/PlatformWidget.h
 	${PROJECT_SOURCE_DIR}/include/app/Encrypter.h
 	${PROJECT_SOURCE_DIR}/include/app/Container.h
 )
