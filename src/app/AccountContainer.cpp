@@ -4,10 +4,9 @@
 
 #include "AccountContainer.h"
 
-AccountContainer::AccountContainer()
+AccountContainer::AccountContainer(Encrypter* _encrypter) :
+    m_encrypter(_encrypter)
 {
-    m_encrypter = new Encrypter();
-
     setFixedWidth(768);
 
     createWidgets();

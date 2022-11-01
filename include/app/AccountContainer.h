@@ -11,7 +11,7 @@ class AccountContainer : public Container
 {
     Q_OBJECT
 public:
-    AccountContainer();
+    AccountContainer(Encrypter* _encrypter);
 
 public slots:
     void createButtonClicked();

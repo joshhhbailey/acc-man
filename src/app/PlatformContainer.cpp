@@ -5,6 +5,8 @@
 
 PlatformContainer::PlatformContainer()
 {
+    m_encrypter = new Encrypter();
+
     createPlatform("Steam");
     m_steamButton = createButton("Steam");
 
@@ -23,7 +25,7 @@ void PlatformContainer::createConnections()
 void PlatformContainer::createPlatform(QString _platformName)
 {
     // Create container to store accounts for platform
-    AccountContainer* accountContainer = new AccountContainer();
+    AccountContainer* accountContainer = new AccountContainer(m_encrypter);
     m_accountContainers.insert(_platformName, accountContainer);
 
     // Add the account container to the mainLayout, but hide for now

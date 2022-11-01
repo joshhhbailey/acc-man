@@ -7,6 +7,7 @@
 
 #include <AccountContainer.h>
 #include "Container.h"
+#include "Encrypter.h"
 
 class PlatformContainer : public Container
 {
@@ -31,6 +32,8 @@ private:
     QMap<QString, QString> m_platformLogos = {{"Steam", "steam_icon.png"},
                                               {"League of Legends", "lol_icon.png"},
                                              };
+
+    Encrypter* m_encrypter;
 };
 
 #endif  // _PLATFORMCONTAINER_H_
