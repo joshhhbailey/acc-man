@@ -23,7 +23,7 @@ target_sources(${TARGETNAME} PRIVATE
 
 target_include_directories(${TARGETNAME} PRIVATE ${CMAKE_SOURCE_DIR}/include/app)
 target_link_libraries(${TARGETNAME} PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
-target_link_libraries(${TARGETNAME} PRIVATE cryptopp-static)
+target_link_libraries(${TARGETNAME} PRIVATE cryptopp::cryptopp)
 
 set_target_properties(${TARGETNAME} PROPERTIES
     WIN32_EXECUTABLE ON		# Prevent the creation of a console window on Windows [THIS MIGHT BE PROBLEMATIC]

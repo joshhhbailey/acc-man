@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Package setup
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 qt_standard_project_setup()
-find_package(cryptopp REQUIRED CONFIG REQUIRED)
+find_package(cryptopp CONFIG REQUIRED)
 
 add_subdirectory(src/app)
 
